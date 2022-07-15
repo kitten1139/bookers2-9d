@@ -11,7 +11,6 @@ class UsersController < ApplicationController
     @users = User.all
     @book = Book.new
     @user = current_user
-    @users = User.where.not(id: current_user.id)
   end
 
   def edit
@@ -35,9 +34,9 @@ class UsersController < ApplicationController
     @users = user.followers
   end
 
-  def followeds
+  def follows
     user = User.find(params[:id])
-    @users = user.followeds
+    @users = user.follows
   end
 
   private
