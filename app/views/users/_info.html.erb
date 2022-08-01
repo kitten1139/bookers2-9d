@@ -10,18 +10,18 @@
   </tr>
   <tr>
     <th>follows</th>
-    <th><%= link_to @user.followers.count, followers_user_path(@user) %></th>
+    <th><%= link_to user.followers.count, followers_user_path(user) %></th>
   </tr>
   <tr>
     <th>followers</th>
-    <th><%= link_to @user.follows.count, follows_user_path(@user) %></th>
+    <th><%= link_to user.follows.count, follows_user_path(user) %></th>
   </tr>
 </table>
 
 <% if user != current_user %>
   <% if user.is_followed_by?(current_user) %>
-    <%=link_to user_relationships_path(user), method: :delete do %>
-      <button type="button" class="btn btn btn-primary mb-3">フォロー外す</button>
+    <%= link_to user_relationships_path(user), method: :delete, data: {turbolinks: true} do %>
+       <button type="button" class="btn btn btn-primary mb-3">フォロー外す</button>
     <% end %>
   <% else %>
     <%=link_to user_relationships_path(user), method: :post do %>
@@ -30,8 +30,8 @@
   <% end %>
 <% end %>
 
-<% if current_user != @user %>
-  <%= link_to 'chatを始める', chat_path(@user.id)%>
+<% if current_user != user && current_user.following?(user) && user.following?(current_user) %>
+  <%= link_to 'chatを始める', chat_path(user.id), class: "ml-3" %>
 <% end %>
 
 <div class='row'>

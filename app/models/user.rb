@@ -36,4 +36,13 @@ class User < ApplicationRecord
     reverse_of_relationships.find_by(follower_id: user.id).present?
   end
 
+  def follow(user_id)
+  relationships.create(followed_id: user_id)
+  end
+
+
+  def following?(user)
+    follows.include?(user)
+  end
+
 end
