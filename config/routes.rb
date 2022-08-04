@@ -23,6 +23,8 @@ Rails.application.routes.draw do
     get 'join' => 'groups#join'
   end
 
+  get "search_book" => "books#search_book"
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
 end
